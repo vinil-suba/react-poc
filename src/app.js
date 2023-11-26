@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {lazy, Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 // import {AppLayout} from './components/AppLayout';
 import About from './components/About'
-import Contact from './components/Contact';
+// import Contact from './components/Contact';
 import Error from './components/Error';
 import Header from './components/Header'
 import Body from './components/Body';
 import ResInfo from './components/ResInfo';
+
+//Dynamic import
+// code optimization
+const Contact = lazy(() => import('./components/Contact'))
 
 export const AppLayout = () =>  {
     return (
@@ -37,7 +41,9 @@ const appRouter = createBrowserRouter([
             },
             {
                 path:'/contact',
-                element: <Contact/>
+                element: <Suspense fallback={
+                    <h1>Loading..............</h1>
+                }><Contact/></Suspense>
             },
         ],
         errorElement: <Error/>
