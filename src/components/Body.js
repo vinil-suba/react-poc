@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ResCard from './ResCard';
 import { mockData } from '../utils/mockData'
 import Shimmer from './Shimmer'
+import { Link } from 'react-router-dom';
 
 
 const Body = () => {
@@ -63,7 +64,9 @@ const Body = () => {
                 </button>
            </div>
             <div className='res-container'>
-               {serachResponse.map( (res) => <ResCard key={res.id} resData = {res}/>)}
+               {serachResponse.map( (res) => 
+               <Link key={res.id} to={"/res-info/"+ res.id}><ResCard  resData = {res}/></Link>
+               )}
             </div>
         </div>
     )
