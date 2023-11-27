@@ -14,5 +14,22 @@ const ResCard = (resData) => {
             <h4>{resData?.resData?.description}</h4>
         </div>
     )
-   }
-   export default ResCard;
+}
+
+export const resCardWithPromotion =  (ResCard) =>  {
+    return (props) =>  {
+        return (
+           <div className="absolute bg-black text-white m-2 p-2 ">
+            <span>
+                Promoted
+            </span>
+            <ResCard {...props}/>
+           </div>
+        )
+    }
+}
+
+export default ResCard;
+
+
+

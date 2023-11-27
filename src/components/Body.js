@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ResCard from './ResCard';
+import ResCard, {resCardWithPromotion} from './ResCard';
 import { mockData } from '../utils/mockData'
 import Shimmer from './Shimmer'
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ const Body = () => {
     const [resStaticData, setResStaticData] = useState(mockData);
     const [serachResponse, setSearchResponse] = useState(mockData);
     const [searchText, setSearchText] = useState("");
-
+    const ResCardWithPromotion = resCardWithPromotion(ResCard);
     useEffect(() => {
         fetcData();
     }, []);
@@ -65,7 +65,12 @@ const Body = () => {
            </div>
             <div className='res-container'>
                {serachResponse.map( (res) => 
-               <Link key={res.id} to={"/res-info/"+ res.id}><ResCard  resData = {res}/></Link>
+               <Link key={res.id} to={"/res-info/"+ res.id}>
+                { (res.rating > 4.5) ? 
+                <ResCardWithPromotion resData = {res} /> : 
+                <ResCard  resData = {res}/> 
+                }
+                </Link>
                )}
             </div>
         </div>

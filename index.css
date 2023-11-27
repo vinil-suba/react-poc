@@ -1,3 +1,8 @@
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
 .header-main {
     display: flex;
     justify-content: space-between;
@@ -21,9 +26,9 @@
 
 .res-card {
     width: 250px;
-    /* height: 400px; */
+    /* height: 400px;
     padding: 5px;
-    margin: 2px;
+    margin: 2px; */
 }
 
 .res-card:hover {
@@ -88,4 +93,12 @@
 .user-fun {
     padding: 1px;
     border: 1px solid black;
+} 
+
+.promotion-card {
+    margin: 2px;
+    padding: 2px;
+    background-color: black;
+    color: white;
+    
 }

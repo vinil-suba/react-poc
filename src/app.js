@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 // import {AppLayout} from './components/AppLayout';
@@ -8,17 +8,32 @@ import Error from './components/Error';
 import Header from './components/Header'
 import Body from './components/Body';
 import ResInfo from './components/ResInfo';
+import UserContext from './utils/UserContext';
+
 
 //Dynamic import
 // code optimization
 const Contact = lazy(() => import('./components/Contact'))
 
 export const AppLayout = () =>  {
+
+const [userName, setUserName] = useState();
+
+useEffect(() => {
+    //API to fetch the data
+    const response = {
+        userName: 'Update Name Vinil',
+    }
+    setUserName(response.userName);
+}, [])
+    
     return (
+        <UserContext.Provider value={{ userName: userName, setUserName }}>
         <div className="conatiner">
             <Header/>
             <Outlet/>
         </div>
+        </UserContext.Provider>
     )
 };
 
