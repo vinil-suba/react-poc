@@ -1,6 +1,7 @@
 import React, {lazy, Suspense, useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
+import { Provider } from 'react-redux'
 // import {AppLayout} from './components/AppLayout';
 import About from './components/About'
 // import Contact from './components/Contact';
@@ -9,6 +10,9 @@ import Header from './components/Header'
 import Body from './components/Body';
 import ResInfo from './components/ResInfo';
 import UserContext from './utils/UserContext';
+import appStore from './utils/redux/appStore';
+import Cart from './components/Cart';
+
 
 
 //Dynamic import
@@ -28,12 +32,14 @@ useEffect(() => {
 }, [])
     
     return (
+        <Provider store={appStore}>
         <UserContext.Provider value={{ userName: userName, setUserName }}>
         <div className="conatiner">
             <Header/>
             <Outlet/>
         </div>
         </UserContext.Provider>
+        </Provider>
     )
 };
 
@@ -53,6 +59,10 @@ const appRouter = createBrowserRouter([
             {
                 path:'/about',
                 element: <About/>
+            },
+            {
+                path:'/cart',
+                element: <Cart/>
             },
             {
                 path:'/contact',

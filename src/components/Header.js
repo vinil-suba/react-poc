@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import { useSelector } from 'react-redux';
 // import UserContext from '../utils/UserContext';
 
 
@@ -9,7 +10,8 @@ const Header = () =>  {
     const [btnStatus, setBtnStatus] = useState("LogIn");
     const onlineStatus = useOnlineStatus();
     // const {userName, setUserName} = useContext(UserContext);
-
+    const cartItems = useSelector((store) => store.items)
+    // console.log('fom header', cartItems)
     return (
         <div className="header-main">
         <div className="logo-container">
@@ -28,6 +30,7 @@ const Header = () =>  {
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/about'>About</Link></li>
                 <li><Link to='/contact'>Contact</Link></li>
+                <li><Link to='/cart'>cart - ({cartItems.length })</Link></li>
                 <button className="btn-login" onClick={
                     () => {
                        btnStatus === 'LogIn' ? setBtnStatus("LogOut") : setBtnStatus("LogIn");

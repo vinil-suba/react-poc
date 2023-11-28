@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import ResCard, {resCardWithPromotion} from './ResCard';
 import { mockData } from '../utils/mockData'
 import Shimmer from './Shimmer'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const Body = () => {
@@ -18,8 +18,8 @@ const Body = () => {
     const fetcData = async () => {
        const dataFromAPI = await fetch(
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.385044&lng=78.486671&page_type=DESKTOP_WEB_LISTING");
-       console.log('dataFromAPI', dataFromAPI);
-       const json = await dataFromAPI;
+    //    console.log('dataFromAPI', dataFromAPI);
+       const json = await dataFromAPI.json();
        console.log(json);
     //    setResStaticData(json.body)
     }
@@ -65,12 +65,14 @@ const Body = () => {
            </div>
             <div className='res-container'>
                {serachResponse.map( (res) => 
-               <Link key={res.id} to={"/res-info/"+ res.id}>
+               <div key={res.id} >
+               {/* <Link key={res.id} to={"/res-info/"+ res.id}> */}
                 { (res.rating > 4.5) ? 
                 <ResCardWithPromotion resData = {res} /> : 
                 <ResCard  resData = {res}/> 
                 }
-                </Link>
+                {/* </Link> */}
+                </div>
                )}
             </div>
         </div>
